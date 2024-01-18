@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Muli&display=swap");
+$line-border-color: #3498db;
+$line-border-empty: #e0e0e0;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f6f6fb;
+  font-family: "Muli", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  .container {
+    text-align: center;
+  }
+  .progress-container {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+    max-width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+    &::before {
+      //记得加下面的content
+      content: "";
+      background-color: $line-border-empty;
+      position: absolute;
+      //让线在中间，原来是默认在左边
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 4px;
+      //灰色一直100%
+      width: 100%;
+      transition: 0.4s ease;
+      z-index: -1;
+    }
+  }
+  
+  //线，两条，一条蓝色一条灰色,上面是灰色，下面是蓝色
+  .progress {
+    background-color: $line-border-color;
+    position: absolute;
+    //下面三行让线在中间，原来是默认在左边
+    top: 50%;
+    left: 0;
+    //自身的高度减50%
+    transform: translateY(-50%);
+    height: 4px;
+    //默认是0，需要通过js呈现
+    width: 0%;
+    transition: 0.4s ease;
+    z-index: -1;
+  }
+
+  .circle {
+    background-color: #fff;
+    color: #999;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid $line-border-empty;
+    transition: 0.4s ease;
+    &.active {
+      border-color: $line-border-color;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn {
+    background-color: $line-border-color;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    border-radius: 6px;
+    margin: 5px;
+    padding: 8px 30px;
+    font-size: 14px;
+    &:disabled {
+      cursor: not-allowed;
+      background-color: $line-border-empty;
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
